@@ -16,11 +16,11 @@ class Vector{
 		Vector* operator+(const Vector*);
 		Vector* operator-(const Vector*);
 		double operator*(const Vector*);
-		//Vector* operator*(const double&);
-		//Vector* operator/(const double&);
+		Vector* operator*(double);
+		Vector* operator/(double);
 		double operator[](int);
 		inline int size();
-		//inline double norm();
+		double norm();
 		void insert(double);
 		void printVector();
 		

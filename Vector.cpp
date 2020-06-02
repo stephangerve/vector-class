@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <math.h>
 #include "Vector.h"
 
 Vector::Vector(){
@@ -62,7 +63,7 @@ Vector* Vector::operator-(const Vector* subtrahend){
 double Vector::operator*(const Vector* multiplicand){
 	if(this->n != multiplicand->n){
                 std::cout << "Error. Vectors need to be the same size." << std::endl;
-                return NULL;
+                return -1;
         }
         else{
                 double sum = 0;
@@ -73,6 +74,28 @@ double Vector::operator*(const Vector* multiplicand){
         }
 
 
+}
+
+Vector* Vector::operator*(double scalar){
+	Vector *scaled = new Vector();
+	for(int i = 0; i < this->n; i++){
+		scaled->insert(this->arrayPtr[i]*scalar);
+	}
+	return scaled;
+}
+
+Vector* Vector::operator/(double scalar){
+	if(scalar == 0){
+		std::cout << "Error: Vector cannot be divided by zero" << std::endl;
+		return NULL;
+	}
+	else{
+		Vector* scaled = new Vector();
+		for(int i = 0; i < n; i++){
+			scaled->insert(this->arrayPtr[i] / scalar);
+		}
+		return scaled;
+	}
 }
 
 double Vector::operator[](int i){
@@ -109,3 +132,10 @@ void Vector::printVector(){
 	std::cout << std::endl;
 }
 
+double Vector::norm(){	
+	int sum = 0;
+	for(int i = 0; i < n; i++){
+		sum += pow(arrayPtr[i], 2);
+	}	
+	return sqrt(sum);
+}
